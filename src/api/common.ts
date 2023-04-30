@@ -19,7 +19,7 @@ class Common extends Abstract {
     const url = 'https://api.openai.com/v1/chat/completions'
     const headers = {
       "Content-Type": "application/json",
-      Authorization: `Bearer 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`,
+      Authorization: `Bearer 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`,
     }
     return this.postReq<ReadableStream<Uint8Array>>({ url, body, headers })
   }
