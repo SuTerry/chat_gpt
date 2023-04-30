@@ -1,49 +1,74 @@
 
-import React, { useState } from 'react'
-import { CssBaseline, Box, Container } from '@mui/material'
+import React, { useState, useRef } from 'react'
+import { CssBaseline, Box, IconButton } from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles'
+
+import { SnackbarProvider } from 'notistack'
 
 import theme from '@/theme'
 
-import Context from '@/context'
+import Context, { GptParams, initGptParams } from '@/context'
 
 import useUser from '@/hooks/useUser'
+import useHistory from '@/hooks/useHistory'
 
 import Header from '@/components/Header'
 import SideNav from '@/components/SideNav'
+import Chat from '@/components/Chat'
 
 import Login from '@/components/Login'
+
+import CloseIcon from '@mui/icons-material/Close'
 
 export default (): JSX.Element => {
   // 侧导航开启状态
   const [openSideNav, setOpenSideNav] = useState(true)
   // 用户状态
   const [user, setUser, setLoginOpen, signOut] = useUser()
+  // 吐丝实例
+  const snackbarRef = useRef<SnackbarProvider>(null)
+  // 问答内容
+  const [historyMessages, setHistoryMessages] = useHistory()
+  // gpt请求参数
+  const [gptParams, setGptParams] = useState<GptParams>(initGptParams)
+  // 选中内容
+  const [select, setSelect] = useState<number[]>([])
 
   return (
-    <Context.Provider value={{ openSideNav, setOpenSideNav, user, setUser, setLoginOpen, signOut }}>
+    <Context.Provider value={{
+      openSideNav,
+      setOpenSideNav,
+      user,
+      setUser,
+      setLoginOpen,
+      signOut,
+      historyMessages,
+      setHistoryMessages,
+      gptParams,
+      setGptParams,
+      select,
+      setSelect,
+    }}>
       <ThemeProvider theme={theme}>
-        <Box sx={{ display: 'flex' }}>
-          <CssBaseline />
-          <Header />
-          <SideNav />
-          <Box
-            component="main"
-            sx={{
-              backgroundColor: (theme) =>
-                theme.palette.mode === 'light'
-                  ? theme.palette.grey[100]
-                  : theme.palette.grey[900],
-              flexGrow: 1,
-              height: '100vh',
-              overflow: 'auto',
-            }}
-          >
-            <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            </Container>
+        <SnackbarProvider
+          ref={snackbarRef}
+          maxSnack={3}
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          preventDuplicate={true}
+          autoHideDuration={2000}
+          action={(snackbarId) => (
+            <IconButton color="inherit" onClick={() => snackbarRef.current?.closeSnackbar(snackbarId)}>
+              <CloseIcon />
+            </IconButton>
+          )} >
+          <Box sx={{ display: 'flex' }}>
+            <CssBaseline />
+            <Header />
+            <SideNav />
+            <Chat />
           </Box>
-        </Box>
-        <Login />
+          <Login />
+        </SnackbarProvider>
       </ThemeProvider>
     </Context.Provider>
   )

@@ -6,7 +6,6 @@ import App from './App'
 
 import './index.less'
 
-
 const rootDom = (document.getElementById('root') as Element)
 
 const root = createRoot(rootDom)

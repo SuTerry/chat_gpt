@@ -24,7 +24,8 @@ export default createTheme({
       main: '#6d82d0'
     },
     appBar: {
-      main: '#fafbfc',
+      main: '#3f414e',
+      contrastText: '#fff',
     },
   },
   components: {

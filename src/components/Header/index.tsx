@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { Typography, Toolbar, IconButton, AppBar as MuiAppBar, Button } from '@mui/material'
+import { Typography, Toolbar, IconButton, Box, AppBar as MuiAppBar, Button } from '@mui/material'
 
 import { styled } from '@mui/material/styles'
 
@@ -13,6 +13,7 @@ import FormatIndentDecreaseIcon from '@mui/icons-material/FormatIndentDecrease'
 import FormatIndentIncreaseIcon from '@mui/icons-material/FormatIndentIncrease'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
+import WarningIcon from '@mui/icons-material/Warning'
 
 import { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
 
@@ -78,17 +79,29 @@ export default (): JSX.Element => {
             variant="h6"
             color="inherit"
             noWrap
-            sx={{ flexGrow: 1 }}
           >
             {!openSideNav && LOGO}
           </Typography>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+
+            <Typography component="span"><WarningIcon sx={{ color: '#fc8800', position: 'relative', top: 2 }} /></Typography>
+            <Typography component="span" sx={{ color: '#ef4444', ml: 1 }}>重要：</Typography>
+            <Typography component="span">为防止网站丢失，请按Ctrl+D收藏本站为书签</Typography>
+          </Box>
           {
             user.login
               ? <>
                 <Typography sx={{ mr: 1 }}>{user.username}</Typography>
-                <Button onClick={() => setOutDialog(true)} startIcon={<AccountCircleIcon />} >退出</Button>
+                <Button sx={{ color: '#fff' }} onClick={() => setOutDialog(true)} startIcon={<AccountCircleIcon />} >退出</Button>
               </>
-              : <Button onClick={() => setLoginOpen(true)} startIcon={<PersonOutlineIcon />} >登录</Button>
+              : <Button sx={{ color: '#fff' }} onClick={() => setLoginOpen(true)} startIcon={<PersonOutlineIcon />} >登录</Button>
           }
         </Toolbar>
       </AppBar >

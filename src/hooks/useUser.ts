@@ -24,6 +24,7 @@ export default (): userUser => {
       username: '',
       login: false,
       dialog: false,
+      id: '',
     })
   }
 

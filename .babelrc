@@ -14,7 +14,8 @@
                     "ie": "9",
                     "safari": "10",
                     "edge": "17"
-                }
+                },
+                "shippedProposals": true
             }
         ],
         "@babel/preset-react",

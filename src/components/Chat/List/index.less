@@ -1,0 +1,72 @@
+.chat_list {
+  height: calc(100vh - 48px);
+
+  overflow: auto;
+
+  >li {
+    padding: 40px 0;
+
+    >.chat_list_box {
+      width: 800px;
+      margin: 0 auto;
+      position: relative;
+
+      &::after {
+        position: absolute;
+        top: -4px;
+        left: -50px;
+        display: block;
+        content: '';
+        width: 32px;
+        height: 31px;
+        background-image: url('../../../assets/img/user.png');
+        background-repeat: no-repeat;
+      }
+
+      >div {
+        > p {
+          margin-bottom: 4px;
+        }
+        word-wrap: break-word;
+        word-break:break-all;
+
+        code {
+          background-color: #000;
+          color: #fff;
+          border-radius: 6px;
+          margin-bottom: 4px;
+
+          .hljs-string,
+          .hljs-number {
+            color: #f50057;
+          }
+
+          .hljs-built_in {
+            color: #357a38;
+          }
+        }
+      }
+
+      >.chat_list_check {
+        position: absolute;
+        top: -12px;
+        left: -100px;
+      }
+
+    }
+  }
+
+  >.assistant {
+    background-color: #444653;
+
+    >.chat_list_box {
+      &::after {
+        background-image: url('../../../assets/img/gpt.png');
+      }
+    }
+  }
+
+  >.chat_list_stack {
+    height: 160px;
+  }
+}

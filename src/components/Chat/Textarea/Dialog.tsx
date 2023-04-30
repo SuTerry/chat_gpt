@@ -18,7 +18,7 @@ export default ({ open, close, sure }: DialogProps): JSX.Element => {
       aria-describedby="alert-dialog-description"
     >
       <DialogTitle id="alert-dialog-title">
-        确定退出登录？
+        确定要删除聊天？
       </DialogTitle>
       <DialogActions>
         <Button onClick={close}>取消</Button>
