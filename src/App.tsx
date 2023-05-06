@@ -15,8 +15,8 @@ import useHistory from '@/hooks/useHistory'
 import Header from '@/components/Header'
 import SideNav from '@/components/SideNav'
 import Chat from '@/components/Chat'
-
 import Login from '@/components/Login'
+import Register from '@/components/Register'
 
 import CloseIcon from '@mui/icons-material/Close'
 
@@ -25,6 +25,8 @@ export default (): JSX.Element => {
   const [openSideNav, setOpenSideNav] = useState(true)
   // 用户状态
   const [user, setUser, setLoginOpen, signOut] = useUser()
+  // 注册弹窗
+  const [registerOpen, setRegisterOpen] = useState(false)
   // 吐丝实例
   const snackbarRef = useRef<SnackbarProvider>(null)
   // 问答内容
@@ -48,6 +50,8 @@ export default (): JSX.Element => {
       setGptParams,
       select,
       setSelect,
+      registerOpen,
+      setRegisterOpen,
     }}>
       <ThemeProvider theme={theme}>
         <SnackbarProvider
@@ -68,6 +72,7 @@ export default (): JSX.Element => {
             <Chat />
           </Box>
           <Login />
+          <Register />
         </SnackbarProvider>
       </ThemeProvider>
     </Context.Provider>

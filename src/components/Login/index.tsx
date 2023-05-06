@@ -1,34 +1,47 @@
-import React, { useState, useContext } from 'react'
-import {Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle} from '@mui/material'
+import React, { useState, useEffect, useContext } from 'react'
+import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material'
 
 import { userApi } from '@/api'
 
 import context from '@/context'
 
 export default (): JSX.Element => {
-  const { user, setLoginOpen, setUser } = useContext(context)
+  const { user, setLoginOpen, setUser, setRegisterOpen } = useContext(context)
 
-  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const [usernameError, setUsernameError] = useState(false)
+  const [emailError, setEmailError] = useState(false)
   const [passwordError, setPasswordError] = useState(false)
+
+  useEffect(() => {
+    setEmail('')
+    setPassword('')
+
+    setEmailError(false)
+    setPasswordError(false)
+  }, [user.dialog])
 
   const handleClose = () => setLoginOpen(false)
 
+  const handleRegister = () => {
+    handleClose()
+    setRegisterOpen(true)
+  }
+
   const handleSubmit = () => {
-    if (!username || !password) {
-      if (!username) setUsernameError(true)
+    if (!email || !password) {
+      if (!email) setEmailError(true)
       if (!password) setPasswordError(true)
       return
     }
 
-    userApi.login({email: username, password}).then(() => {
+    userApi.login({ email, password }).then(() => {
       // console.log(res, 'res');
-      
+
     })
     setUser({
-      username,
+      username: '',
       login: true,
       dialog: false,
       id: '',
@@ -40,17 +53,17 @@ export default (): JSX.Element => {
       <DialogTitle>请先登录您的账户</DialogTitle>
       <DialogContent>
         <TextField
-          error={usernameError}
+          error={emailError}
           sx={{ mb: 4 }}
           autoFocus
           margin="dense"
-          id="username"
-          label="用户名"
+          id="email"
+          label="邮箱"
           fullWidth
           variant="outlined"
-          value={username}
-          onChange={(e) => { setUsername(e.target.value), setUsernameError(false) }}
-          helperText={usernameError ? "请输入用户名" : ""}
+          value={email}
+          onChange={(e) => { setEmail(e.target.value), setEmailError(false) }}
+          helperText={emailError ? "请输入邮箱" : ""}
         />
         <TextField
           error={passwordError}
@@ -66,6 +79,7 @@ export default (): JSX.Element => {
         />
       </DialogContent>
       <DialogActions>
+        <Button sx={{ mr: 'auto', ml: 1.5 }} onClick={handleRegister}>注册账户</Button>
         <Button onClick={handleClose}>取消</Button>
         <Button onClick={handleSubmit}>登录</Button>
       </DialogActions>

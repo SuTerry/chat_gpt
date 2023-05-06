@@ -50,6 +50,8 @@ interface Context {
   setGptParams: (gptParams: GptParams) => void
   select: number[]
   setSelect: (select: number[]) => void
+  registerOpen: boolean
+  setRegisterOpen: (open: boolean) => void
 }
 
 // 初始值
@@ -66,6 +68,8 @@ const init: Context = {
   setGptParams: () => null,
   select: [],
   setSelect: () => null,
+  registerOpen: false,
+  setRegisterOpen: () => null,
 }
 
 export default createContext<Context>(init)
