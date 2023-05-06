@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 
-import { TextareaAutosize, IconButton, CircularProgress, Chip } from '@mui/material'
+import { TextareaAutosize, IconButton, CircularProgress, Chip, Link, Stack } from '@mui/material'
 
 import { useSnackbar } from 'notistack'
 
@@ -134,6 +134,10 @@ export default (): JSX.Element => {
       <IconButton aria-label="delete" className='icon_btn' onClick={handleSend} disabled={loading}>
         {loading ? <CircularProgress size={24} /> : <SendIcon />}
       </IconButton>
+      <Stack className='chat_textarea_links' direction="row" spacing={2}>
+        <Link href='#'>隐私政策</Link>
+        <Link href='#'>用户协议</Link>
+      </Stack>
       <DeleteDialog open={deleteDialog} close={() => setDeleteDialog(false)} sure={deleteChat} />
     </div>
   )
