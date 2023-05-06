@@ -1,10 +1,7 @@
 import React, { useState, useContext } from 'react'
-import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogTitle from '@mui/material/DialogTitle'
+import {Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle} from '@mui/material'
+
+import { userApi } from '@/api'
 
 import context from '@/context'
 
@@ -25,10 +22,16 @@ export default (): JSX.Element => {
       if (!password) setPasswordError(true)
       return
     }
+
+    userApi.login({email: username, password}).then(() => {
+      // console.log(res, 'res');
+      
+    })
     setUser({
       username,
       login: true,
       dialog: false,
+      id: '',
     })
   }
 
