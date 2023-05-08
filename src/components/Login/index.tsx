@@ -1,11 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material'
 
+import { useSnackbar } from 'notistack'
+
 import { userApi } from '@/api'
 
 import context from '@/context'
 
 export default (): JSX.Element => {
+  const { enqueueSnackbar } = useSnackbar()
+
   const { user, setLoginOpen, setUser, setRegisterOpen } = useContext(context)
 
   const [email, setEmail] = useState('')
@@ -36,15 +40,17 @@ export default (): JSX.Element => {
       return
     }
 
-    userApi.login({ email, password }).then(() => {
-      // console.log(res, 'res');
-
-    })
-    setUser({
-      username: '',
-      login: true,
-      dialog: false,
-      id: '',
+    userApi.login({ email, password }).then((res) => {
+      enqueueSnackbar(res.message, { variant: 'success' })
+      const {username, userid} = res.data
+      setUser({
+        userid,
+        username,
+        login: true,
+        dialog: false,
+      })
+    }).catch((err)=> {
+      enqueueSnackbar(err, { variant: 'error' })
     })
   }
 

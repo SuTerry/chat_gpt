@@ -23,6 +23,11 @@ class Common extends Abstract {
     }
     return this.postReq<ReadableStream<Uint8Array>>({ url, body, headers })
   }
+
+  openai(body: unknown) {
+    const url = '/openai-api'
+    return this.postReq<ReadableStream<Uint8Array>>({ url, body })
+  }
 }
 
 // 单列模式返回对象

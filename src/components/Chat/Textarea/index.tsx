@@ -64,12 +64,9 @@ export default (): JSX.Element => {
     }
 
     commonApi.chat({
-      userid: user.id,
+      userid: user.userid,
       messages: [...messages, { role: 'user', content: message }],
       model: gptParams.model,
-      stream: true,
-      max_tokens: 1000,
-      // ...gptParams
     }).then(async res => {
       const reader = res.getReader()
       const messagesAssistant: HistoryMessage = { role: 'assistant', content: '', time: new Date().getTime() }

@@ -27,17 +27,17 @@ class Abstract {
           const res = response.data
           const returnType = res.type
           const returnCode = res.code
-          const returnData = res.data
-          if (returnCode === 200) {
+          
+          if (returnCode === 0) {
             // 成功
-            return resolve(returnData)
+            return resolve(res)
           } else if (returnType === 'application/octet-stream') {
             // 成功
             return resolve(res)
           } else if (contentType === 'text/event-stream') {
             return resolve(res)
           } else {
-           
+            return reject(new Error(res.message))
           }
         })
         .catch((err) => {

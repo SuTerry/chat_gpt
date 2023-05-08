@@ -1,6 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react'
 
-import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, Stack } from '@mui/material'
+import {
+  Button,
+  TextField,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Stack,
+} from '@mui/material'
 
 import { useSnackbar } from 'notistack'
 
@@ -32,7 +40,7 @@ export default (): JSX.Element => {
   const [timer, setTimer] = useState(timerNum)
   const [verifycodeText, setVerifycodeText] = useState(sendVerifycode)
 
-  useEffect(()=> {
+  useEffect(() => {
     setUsername('')
     setEmail('')
     setPassword('')
@@ -44,13 +52,13 @@ export default (): JSX.Element => {
     setPasswordError(false)
     setPasswordAgainError(false)
     setVerifycodeError(false)
-
   }, [registerOpen])
 
   useEffect(() => {
     if (timer === timerNum) return
     setVerifycodeText(timer + timering)
-    if (timer === 0) return setTimer(timerNum), setVerifycodeText(sendVerifycode)
+    if (timer === 0)
+      return setTimer(timerNum), setVerifycodeText(sendVerifycode)
     setTimeout(() => {
       setTimer(timer - 1)
     }, 1000)
@@ -65,7 +73,16 @@ export default (): JSX.Element => {
 
   const handleVerifycode = () => {
     if (!email) return setEmailError(true)
-    setTimer(59)
+
+    userApi
+      .verifyemail({ email })
+      .then((res) => {
+        enqueueSnackbar(res.message, { variant: 'success' })
+        setTimer(59)
+      })
+      .catch((err) => {
+        enqueueSnackbar(err, { variant: 'error' })
+      })
   }
 
   const handleSubmit = () => {
@@ -78,15 +95,21 @@ export default (): JSX.Element => {
       return
     }
 
-    if (username.length < 2 || username.length > 33) return enqueueSnackbar('用户名需要大于2位小于33位!', { variant: 'warning' })
-    if (password.length < 7 || password.length > 65) return enqueueSnackbar('密码需要大于7位小于65位!', { variant: 'warning' })
-    if (password !== passwordAgain) return enqueueSnackbar('两次密码不一致!', { variant: 'warning' })
+    if (username.length < 2 || username.length > 33)
+      return enqueueSnackbar('用户名需要大于2位小于33位!', {
+        variant: 'warning',
+      })
+    if (password.length < 7 || password.length > 65)
+      return enqueueSnackbar('密码需要大于7位小于65位!', { variant: 'warning' })
+    if (password !== passwordAgain)
+      return enqueueSnackbar('两次密码不一致!', { variant: 'warning' })
 
-    userApi.login({ email: username, password }).then(() => {
-      // console.log(res, 'res');
-
+    userApi.register({ email, username, password, verifycode }).then((res) => {
+      enqueueSnackbar(res.message, { variant: 'success' })
+      handleLogin()
+    }).catch((err) => {
+      enqueueSnackbar(err, { variant: 'error' })
     })
-
   }
 
   return (
@@ -103,8 +126,10 @@ export default (): JSX.Element => {
           fullWidth
           variant="outlined"
           value={email}
-          onChange={(e) => { setEmail(e.target.value), setEmailError(false) }}
-          helperText={emailError ? "请输入邮箱" : ""}
+          onChange={(e) => {
+            setEmail(e.target.value), setEmailError(false)
+          }}
+          helperText={emailError ? '请输入邮箱' : ''}
         />
         <TextField
           error={usernameError}
@@ -115,8 +140,10 @@ export default (): JSX.Element => {
           fullWidth
           variant="outlined"
           value={username}
-          onChange={(e) => { setUsername(e.target.value), setUsernameError(false) }}
-          helperText={usernameError ? "请输入用户名" : ""}
+          onChange={(e) => {
+            setUsername(e.target.value), setUsernameError(false)
+          }}
+          helperText={usernameError ? '请输入用户名' : ''}
         />
         <TextField
           error={passwordError}
@@ -128,8 +155,10 @@ export default (): JSX.Element => {
           fullWidth
           variant="outlined"
           value={password}
-          onChange={(e) => { setPassword(e.target.value), setPasswordError(false) }}
-          helperText={passwordError ? "请输入密码" : ""}
+          onChange={(e) => {
+            setPassword(e.target.value), setPasswordError(false)
+          }}
+          helperText={passwordError ? '请输入密码' : ''}
         />
         <TextField
           error={passwordAgainError}
@@ -141,8 +170,10 @@ export default (): JSX.Element => {
           fullWidth
           variant="outlined"
           value={passwordAgain}
-          onChange={(e) => { setPasswordAgain(e.target.value), setPasswordAgainError(false) }}
-          helperText={passwordAgainError ? "请输再次输入密码" : ""}
+          onChange={(e) => {
+            setPasswordAgain(e.target.value), setPasswordAgainError(false)
+          }}
+          helperText={passwordAgainError ? '请输再次输入密码' : ''}
         />
         <Stack direction="row">
           <TextField
@@ -153,8 +184,10 @@ export default (): JSX.Element => {
             fullWidth
             variant="outlined"
             value={verifycode}
-            onChange={(e) => { setVerifycode(e.target.value), setVerifycodeError(false) }}
-            helperText={verifycodeError ? "请输再次输入密码" : ""}
+            onChange={(e) => {
+              setVerifycode(e.target.value), setVerifycodeError(false)
+            }}
+            helperText={verifycodeError ? '请输再次输入密码' : ''}
           />
           <Button
             disabled={verifycodeText !== sendVerifycode}
@@ -167,7 +200,9 @@ export default (): JSX.Element => {
         </Stack>
       </DialogContent>
       <DialogActions>
-        <Button sx={{ mr: 'auto', ml: 1.5 }} onClick={handleLogin}>返回登录</Button>
+        <Button sx={{ mr: 'auto', ml: 1.5 }} onClick={handleLogin}>
+          返回登录
+        </Button>
         <Button onClick={handleClose}>取消</Button>
         <Button onClick={handleSubmit}>注册</Button>
       </DialogActions>

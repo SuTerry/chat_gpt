@@ -4,7 +4,7 @@ export interface User {
   username: string,
   login: boolean,
   dialog: boolean,
-  id: string
+  userid: string
 }
 
 export interface HistoryMessage {
@@ -26,7 +26,7 @@ export const initUser: User = {
   username: '',
   login: false,
   dialog: false,
-  id: '',
+  userid: '',
 }
 
 export const initGptParams: GptParams = {
