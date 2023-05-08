@@ -17,7 +17,7 @@ export type HistoryMessages = HistoryMessage[]
 
 
 export interface GptParams {
-  taskid: string
+  chatid: string
   model: string
   topicid: string
 }
@@ -30,7 +30,7 @@ export const initUser: User = {
 }
 
 export const initGptParams: GptParams = {
-  taskid: '123',
+  chatid: '123',
   model: 'gpt-3.5-turbo',
   topicid: '1-01-01',
 }

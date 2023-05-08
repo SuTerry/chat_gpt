@@ -63,11 +63,12 @@ export default (): JSX.Element => {
       messages.push(...arr.slice(-3))
     }
 
-    commonApi.chat({
+    commonApi.openai({
       userid: user.userid,
       messages: [...messages, { role: 'user', content: message }],
-      model: gptParams.model,
+      ...gptParams,
     }).then(async res => {
+      
       const reader = res.getReader()
       const messagesAssistant: HistoryMessage = { role: 'assistant', content: '', time: new Date().getTime() }
       let done = false
@@ -76,6 +77,7 @@ export default (): JSX.Element => {
 
       while (!done) {
         const { value, done: readerDone } = await reader.read()
+        
         if (value) {
           content += value
           setHistoryMessages([...historyMessages, messageUser, { ...messagesAssistant, content }])
@@ -98,7 +100,7 @@ export default (): JSX.Element => {
   }
 
   const handleDelete = () => {
-    if (select.length === 0) enqueueSnackbar('请勾选要删除的数据', { variant: 'warning' })
+    if (select.length === 0) return enqueueSnackbar('请勾选要删除的数据', { variant: 'warning' })
     setDeleteDialog(true)
   }
 

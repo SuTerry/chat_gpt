@@ -6,10 +6,10 @@
 
 import Abstract from '@/api/ajax/index'
 
-// import { API_HOST } from '@/api/config'
+import { API_HOST } from '@/api/config'
 
 class Common extends Abstract {
-  // baseURL = API_HOST
+  baseURL = API_HOST
 
   /**
    * gpt
@@ -25,7 +25,7 @@ class Common extends Abstract {
   }
 
   openai(body: unknown) {
-    const url = '/openai-api'
+    const url = '/openai-api-stream'
     return this.postReq<ReadableStream<Uint8Array>>({ url, body })
   }
 }

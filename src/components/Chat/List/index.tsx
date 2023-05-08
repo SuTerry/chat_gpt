@@ -22,7 +22,14 @@ export default (): JSX.Element => {
   }, [historyMessages])
 
   const handleCheck = (index: number) => {
-    setSelect([...select, index])
+    const i = select.indexOf(index)
+    if (i > -1) {
+      const _select = [...select]
+      _select.splice(i, 1)
+      setSelect([..._select])
+    } else {
+      setSelect([...select, index])
+    }
   }
 
   return (

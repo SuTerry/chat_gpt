@@ -27,14 +27,15 @@ class Abstract {
           const res = response.data
           const returnType = res.type
           const returnCode = res.code
-          
+
           if (returnCode === 0) {
             // 成功
             return resolve(res)
           } else if (returnType === 'application/octet-stream') {
             // 成功
             return resolve(res)
-          } else if (contentType === 'text/event-stream') {
+          // } else if (contentType === 'text/event-stream') {
+          } else if (contentType === 'text/event-stream; charset=utf-8') {
             return resolve(res)
           } else {
             return reject(new Error(res.message))

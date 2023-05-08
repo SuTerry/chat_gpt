@@ -65,16 +65,19 @@ export const performOfRes = async (
 
               let text = ""
               const str = decoder.decode(value)
-              const strs = str.split("data: ").filter((v) => v)
+              const strs = str.split("data:").filter((v) => v)
               for (let i = 0; i < strs.length; i++) {
                 const val = strs[i]
                 if (val.includes("[DONE]")) {
                   controller.close()
                   return
                 }
+                
+
                 const data = JSON.parse(val)
-                data.choices[0].delta.content &&
-                  (text += data.choices[0].delta.content)
+                // data.choices[0].delta.content &&
+                //   (text += data.choices[0].delta.content)
+                data.content && (text += data.content)
               }
               controller.enqueue(text)
               return pump()
