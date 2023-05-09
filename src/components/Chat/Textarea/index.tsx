@@ -106,9 +106,11 @@ export default (): JSX.Element => {
 
   const deleteChat = () => {
     const _historyMessages = [...historyMessages]
-    select.reverse().forEach((index) => {
+
+    select.sort((a, b) => b - a).forEach((index) => {
       _historyMessages.splice(index, 1)
     })
+    
     setHistoryMessages(_historyMessages)
     setSelect([])
     setDeleteDialog(false)
