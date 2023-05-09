@@ -10,6 +10,6 @@ export const API_HOST =
       // 测试
       : (env === 'sit' ? ''
         // 开发
-        : (env === 'dev' ? '//43.207.190.68:8080'
+        : (env === 'dev' ? '//chatnwork.com:8080'
           // 本地
           : '//chatnwork.com:8080')))
