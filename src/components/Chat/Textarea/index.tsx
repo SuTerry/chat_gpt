@@ -136,8 +136,8 @@ export default (): JSX.Element => {
         {loading ? <CircularProgress size={24} /> : <SendIcon />}
       </IconButton>
       <Stack className='chat_textarea_links' direction="row" spacing={2}>
-        <Link href='#'>隐私政策</Link>
-        <Link href='#'>用户协议</Link>
+        <Link target="_blank" href='https://kuainsight.com/privacypolicy.html'>隐私政策</Link>
+        <Link target="_blank" href='https://kuainsight.com/userterms.html'>用户协议</Link>
       </Stack>
       <DeleteDialog open={deleteDialog} close={() => setDeleteDialog(false)} sure={deleteChat} />
     </div>
