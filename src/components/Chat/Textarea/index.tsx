@@ -5,8 +5,8 @@ import {
   IconButton,
   CircularProgress,
   Chip,
-  Link,
-  Stack,
+  // Link,
+  // Stack,
   Typography,
 } from '@mui/material'
 
@@ -197,7 +197,7 @@ export default (): JSX.Element => {
       >
         此产品基于OpenAI开发，OpenAI可能会回复不准确的信息，请注意甄别
       </Typography>
-      <Stack className="chat_textarea_links" direction="row" spacing={2}>
+      {/* <Stack className="chat_textarea_links" direction="row" spacing={2}>
         <Link
           target="_blank_privacypolicy"
           href="https://kuainsight.com/privacypolicy.html"
@@ -210,7 +210,8 @@ export default (): JSX.Element => {
         >
           用户协议
         </Link>
-      </Stack>
+      </Stack> */}
+      <Typography component="p" className="chat_textarea_links">contact@kuainsight.com</Typography>
       <DeleteDialog
         open={deleteDialog}
         close={() => setDeleteDialog(false)}
