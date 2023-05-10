@@ -17,7 +17,7 @@ export default ({ open, close, sure }: DialogProps): JSX.Element => {
       aria-describedby="alert-dialog-description"
     >
       <DialogTitle id="alert-dialog-title">
-        是否重新发起会话？
+        是否发起新会话？
       </DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description" sx={{color: '#d32f2f'}}>

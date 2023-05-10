@@ -82,7 +82,7 @@ export default (): JSX.Element => {
             color="inherit"
             noWrap
           >
-            {!openSideNav && <img src={logoImg} style={{ height: '40px' }} />}
+            {!openSideNav && <img src={logoImg} style={{ height: '34px' }} />}
           </Typography>
           <Box
             sx={{

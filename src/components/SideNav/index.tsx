@@ -45,11 +45,11 @@ export default (): JSX.Element => {
   return (
     <Drawer variant="permanent" open={openSideNav}>
       <Box sx={{
-        width: 200,
+        height: 45,
         margin: '20px auto 0',
         textAlign: 'center',
       }}>
-        <img src={logoImg} style={{ width: '100%' }} />
+        <img src={logoImg} style={{ height: '100%' }} />
       </Box>
       <Divider />
       <List component="nav" sx={{ height: '100vh', position: 'relative' }}>
