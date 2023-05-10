@@ -3,7 +3,7 @@ import { Typography, Toolbar, IconButton, Box, AppBar as MuiAppBar, Button } fro
 
 import { styled } from '@mui/material/styles'
 
-import { DRAWERWIDTH, LOGO } from '@/constant/layout'
+import { DRAWERWIDTH } from '@/constant/layout'
 
 import context from '@/context'
 
@@ -14,6 +14,8 @@ import FormatIndentIncreaseIcon from '@mui/icons-material/FormatIndentIncrease'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
 import WarningIcon from '@mui/icons-material/Warning'
+
+import logoImg from '@/assets/img/logo.png'
 
 import { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
 
@@ -80,7 +82,7 @@ export default (): JSX.Element => {
             color="inherit"
             noWrap
           >
-            {!openSideNav && LOGO}
+            {!openSideNav && <img src={logoImg} style={{ height: '40px' }} />}
           </Typography>
           <Box
             sx={{
