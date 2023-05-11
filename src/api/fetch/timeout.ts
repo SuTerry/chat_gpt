@@ -28,8 +28,10 @@ const timeoutInit: TimeoutInit = (init, req) => {
 const overtime: Overtime = (timeout, controller) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (controller) controller.abort()
-      reject(new Error(`timeout of${timeout}ms exceeded`))
+      if (controller) {
+        controller.abort()
+        reject(new Error(`timeout of${timeout}ms exceeded`))
+      }
     }, timeout)
   })
 }

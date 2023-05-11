@@ -12,6 +12,7 @@ class Abstract {
     headers,
     method,
     body,
+    signal,
   }: ApiFetchRequest): Promise<T> {
     return new Promise((resolve, reject) => {
       const baseURLVal = baseURL || this.baseURL
@@ -21,6 +22,7 @@ class Abstract {
         headers,
         method,
         body,
+        signal,
       })
         .then((response) => {
           const contentType = (response.headers['content-type'] as string)
@@ -56,8 +58,9 @@ class Abstract {
     url,
     headers,
     body,
+    signal,
   }: ApiFetchRequest): Promise<T> {
-    return this.apiFetch({ baseURL, url, headers, method: Method.GET, body })
+    return this.apiFetch({ baseURL, url, headers, method: Method.GET, body, signal })
   }
 
   /**
@@ -68,8 +71,9 @@ class Abstract {
     url,
     headers,
     body,
+    signal
   }: ApiFetchRequest): Promise<T> {
-    return this.apiFetch({ baseURL, url, headers, method: Method.POST, body })
+    return this.apiFetch({ baseURL, url, headers, method: Method.POST, body, signal })
   }
 }
 

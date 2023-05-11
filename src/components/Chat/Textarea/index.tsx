@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useRef, useEffect } from 'react'
 
 import {
   TextareaAutosize,
@@ -45,6 +45,8 @@ export default (): JSX.Element => {
 
   const [deleteDialog, setDeleteDialog] = useState(false)
 
+  const openaiController = useRef<AbortController>()
+
   useEffect(() => {
     document.addEventListener('keydown', keydown)
     return () => document.removeEventListener('keydown', keydown)
@@ -79,17 +81,18 @@ export default (): JSX.Element => {
 
     if (history) {
       const arr = historyMessages
-        .filter((item) => item.role === 'user')
         .map(({ role, content }) => ({ role, content }))
-      messages.push(...arr.slice(-3))
+      messages.push(...arr.slice(-6))
     }
+
+    openaiController.current = new AbortController()
 
     commonApi
       .openai({
         userid: user.userid,
         messages: [...messages, { role: 'user', content: message }],
         ...gptParams,
-      })
+      }, openaiController.current.signal)
       .then(async (res) => {
         const reader = res.getReader()
         const messagesAssistant: HistoryMessage = {
@@ -136,6 +139,10 @@ export default (): JSX.Element => {
     setDeleteDialog(true)
   }
 
+  const handleAbort = () => {
+    openaiController.current?.abort()
+  }
+
   const deleteChat = () => {
     const _historyMessages = [...historyMessages]
 
@@ -162,6 +169,18 @@ export default (): JSX.Element => {
         onDelete={history ? handleHisory : undefined}
         onClick={handleHisory}
       />
+      {
+        loading && <Chip
+          className="chat_textarea_abort"
+          variant="filled"
+          label="终止"
+          color="primary"
+          size="small"
+          onDelete={handleAbort}
+          onClick={handleAbort}
+        />
+      }
+      {/* <Button variant="outlined" size='small' className='chat_textarea_abort'>终止</Button> */}
       <IconButton
         className="chat_textarea_delete"
         aria-label="delete"

@@ -24,9 +24,9 @@ class Common extends Abstract {
     return this.postReq<ReadableStream<Uint8Array>>({ url, body, headers })
   }
 
-  openai(body: unknown) {
+  openai(body: unknown, signal: AbortSignal) {
     const url = '/openai-api-stream'
-    return this.postReq<ReadableStream<Uint8Array>>({ url, body })
+    return this.postReq<ReadableStream<Uint8Array>>({ url, body, signal })
   }
 }
 
