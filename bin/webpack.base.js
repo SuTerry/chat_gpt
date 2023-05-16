@@ -42,11 +42,14 @@ const rules = [
       {
         loader: "babel-loader",
         options: {
-          cacheDirectory: true
-        }
+          cacheDirectory: true,
+          include: [
+            /node_modules\/marked/
+          ],
+        },
+        
       }
     ],
-    exclude: '/node_modules/'
   },
   {
     test: /\.less$/,
