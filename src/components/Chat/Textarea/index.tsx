@@ -5,8 +5,6 @@ import {
   IconButton,
   CircularProgress,
   Chip,
-  // Link,
-  // Stack,
   Typography,
 } from '@mui/material'
 
@@ -120,7 +118,6 @@ export default (): JSX.Element => {
       })
       .finally(() => {
         setLoading(false)
-        window.hljs.highlightAll()
       })
   }
 

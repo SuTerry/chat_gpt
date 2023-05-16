@@ -5,13 +5,5 @@
 
 
 declare global {
-  interface Window {
-    marked: {
-      parse: (str: string) => TrustedHTML
-    }
-    hljs: {
-      initHighlightingOnLoad: () => void
-      highlightAll: () => void
-    }
-  }
+  
 }
