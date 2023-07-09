@@ -11,6 +11,7 @@ export default defineConfig({
     vue(),
     AutoImport({
       resolvers: [ElementPlusResolver()],
+      imports: ['vue'],
     }),
     Components({
       resolvers: [ElementPlusResolver({importStyle: 'sass'})],
