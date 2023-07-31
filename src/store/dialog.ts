@@ -3,7 +3,9 @@ import { defineStore } from 'pinia'
 export default defineStore('dialogStore', {
   state: () => {
     return {
-      loginDialog: false
+      loginDialog: false,
+      registerDialog: false,
+      forgetPWDialog: false,
     }
   },
   getters: {},

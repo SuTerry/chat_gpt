@@ -5,5 +5,6 @@ import store from '@/store'
 import router from './router'
 import App from '@/App.vue'
 
+import 'element-plus/theme-chalk/el-message.css'
 
 createApp(App).use(ElementPlus, {locale: zhCn}).use(store).use(router).mount('#app')

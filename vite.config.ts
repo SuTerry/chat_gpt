@@ -19,7 +19,14 @@ export default defineConfig({
   ],
   server: {
     open: true,
-    port: 3000
+    port: 3000,
+    proxy: {
+      "/api": {
+        target: "http://www.chatnwork.com:8080",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
   },
   resolve: {
     alias: {

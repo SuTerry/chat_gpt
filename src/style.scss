@@ -3,5 +3,27 @@
     'primary': (
       'base': #6d82d0,
     ),
+    'info': (
+      'base': #e6e6e6,
+    ),
   ),
+  $bg-color: (
+    'page': #0a0a0a,
+    '': #000020,
+    'overlay': #1d1e1f,
+  ),
+  $text-color: (
+    'primary': #e6e6e6,
+    'regular': #e6e6e6,
+  ),
+  $button-text-color: #fff,
+  $button: (
+    text-color: #909399,
+  ),
+  $input: (
+    text-color: #909399,
+  ),
+  $dropdown: (
+    'menuItem-hover-fill': #444653,
+  )
 );
