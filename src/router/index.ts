@@ -10,8 +10,8 @@ const routes = [
     }
   },
   {
-    path: '/api',
-    name: 'Api',
+    path: '/doc',
+    name: 'Doc',
     component: () => import('@/views/ApiDoc.vue'),
     meta: {
       keepAlive: false,

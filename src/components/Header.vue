@@ -3,7 +3,7 @@
     <img :src="logoImg" alt="">
     <div class="links">
       <router-link to="/home">聊天&工作</router-link>
-      <router-link to="/api">接口文档</router-link>
+      <router-link to="/doc">接口文档</router-link>
       <router-link to="/account">账号管理</router-link>
       <router-link to="/about">关于我们</router-link>
     </div>
